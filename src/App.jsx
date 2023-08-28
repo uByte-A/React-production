@@ -16,34 +16,6 @@ function App() {
   const [show, setShow] = useState(false)
   const [message, setMessage] = useState('Now you can view your playlist on Spotify!')
   const [failedShow, setFailedShow] = useState(false)
-  /*useEffect(() => {
-    var client_id = '864c1dd4d3e34244b51e708380a43fee';
-    var client_secret = '63cd9644598e43d6a306e6db0bbc6506';
-
-    var details = {
-      'grant_type': 'client_credentials'
-  };
-
-    var formBody = [];
-    for (var property in details) {
-      var encodedKey = encodeURIComponent(property);
-      var encodedValue = encodeURIComponent(details[property]);
-      formBody.push(encodedKey + "=" + encodedValue);
-    }
-    formBody = formBody.join("&");
-
-    fetch('https://accounts.spotify.com/api/token', {
-      method:'POST',
-      headers:{
-        "Content-Type": "application/x-www-form-urlencoded",
-        'Authorization': 'Basic '+ btoa(client_id + ':' + client_secret)
-      },
-      body:formBody,
-    })
-    .then((res) => res.json())
-    .then((res) => setToken(res.access_token))
-
-  }, [])*/
 
   useEffect(() => {
 
@@ -238,16 +210,27 @@ function App() {
           setName('');
           setShow(true)
           setMessage('Now you can view your playlist on Spotify!')
+          document.getElementById('loader').classList.add('hidden')
         } else {
           setFailedShow(true)
           setMessage('Try refreshing this page or checking your internet connection')
+          document.getElementById('loader').classList.add('hidden')
         }
       })
     }).catch(res => {
         setFailedShow(true)
         setMessage('Try refreshing this page or checking your internet connection')
+        document.getElementById('loader').classList.add('hidden')
     })
   }
+
+  function animate(e){
+    const element = document.getElementById('loader')
+    element.classList.remove('hidden')
+    element.style.transform = 'translateX(40px)'
+  }
+
+
 
   return (
     <>
@@ -258,7 +241,7 @@ function App() {
         <SearchBar value={value} setValue={setValue} onSubmit={Results}/>
         <div className='w-full flex-col h-full overflow-scroll grid grid-cols-1 grid-rows-2 gap-4 mt-4 md:grid-cols-2  md:grid-rows-1'>
         <SearchResults results={results} handleClick={handleClick}/>
-        <Playlist added={added} handleClick={handleClick2} value={name} setValue={setName} handleSubmit={handleSubmit}/>
+        <Playlist added={added} handleClick={handleClick2} value={name} setValue={setName} handleSubmit={handleSubmit} animate={animate}/>
         </div>
     </div>
     </>
