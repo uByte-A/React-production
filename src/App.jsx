@@ -80,7 +80,7 @@ function App() {
         let scope = 'user-read-private user-read-email playlist-modify-public playlist-modify-private';
     
         localStorage.setItem('code_verifier', codeVerifier);
-    
+        console.log('should of set the local storage')
         let args = new URLSearchParams({
           response_type: 'code',
           client_id: clientId,
