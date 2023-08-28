@@ -71,7 +71,7 @@ function App() {
       }
     
       const clientId = '864c1dd4d3e34244b51e708380a43fee';
-      const redirectUri = 'https://unique-daffodil-7c5b1c.netlify.app';
+      const redirectUri = 'proteinshake.netlify.app';
     
       let codeVerifier = generateRandomString(128);
     
@@ -96,7 +96,7 @@ function App() {
     
     }else{
         const clientId = '864c1dd4d3e34244b51e708380a43fee';
-        const redirectUri = 'https://unique-daffodil-7c5b1c.netlify.app';
+        const redirectUri = 'proteinshake.netlify.app';
         let codeVerifier = localStorage.getItem('code_verifier');
     
         let body = new URLSearchParams({
